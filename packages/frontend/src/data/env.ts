@@ -1,0 +1,3 @@
+export const STOCKQUEST_API_URL = process.env.STOCKQUEST_API_URL!;
+export const STOCKQUEST_API_BEARER_TOKEN =
+  process.env.STOCKQUEST_API_BEARER_TOKEN!;

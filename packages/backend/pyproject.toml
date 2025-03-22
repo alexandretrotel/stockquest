@@ -1,0 +1,32 @@
+[project]
+name = "stockquest-api"
+version = "1.0.0"
+description = "The official backend for StockQuest"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "dotenv>=0.9.9",
+    "flask>=3.1.0",
+    "flask-cors>=5.0.1",
+    "gunicorn>=23.0.0",
+    "numpy>=2.2.3",
+    "pandas>=2.2.3",
+    "scipy>=1.15.2",
+]
+
+[project.optional-dependencies]
+dev = [
+    "black>=25.1.0",
+    "mypy>=1.15.0",
+    "types-flask>=1.1.6",
+    "pipdeptree>=2.2.0",
+]
+
+[tool.black]
+line-length = 88
+target-version = ['py39']
+
+[tool.mypy]
+python_version = "3.12"
+ignore_missing_imports = true 
+strict = true

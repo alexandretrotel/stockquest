@@ -1,0 +1,7 @@
+_.pyc
+**pycache**/
+_.log
+\*.md
+tests/
+docs/
+scripts/

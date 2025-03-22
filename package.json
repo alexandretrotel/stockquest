@@ -1,0 +1,7 @@
+{
+  "name": "stockquest-monorepo",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ]
+}

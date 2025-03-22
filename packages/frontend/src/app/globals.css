@@ -1,0 +1,384 @@
+@import "tailwindcss";
+
+@plugin 'tailwindcss-animate';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+
+  --color-game-primary: #4caf50;
+  --color-game-secondary: #ffc107;
+  --color-game-accent: #f44336;
+  --color-game-purple: #673ab7;
+  --color-game-blue: #2196f3;
+  --color-game-light: #f5f7fa;
+  --color-game-dark: #263238;
+  --color-game-gray: #78909c;
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-xl: 0.75rem;
+  --radius-2xl: 1rem;
+
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+  --animate-bounce: bounce 1s ease-in-out infinite;
+  --animate-pulse: pulse 2s ease-in-out infinite;
+  --animate-confetti: confetti 5s ease-in-out forwards;
+  --animate-shine: shine 3s ease-in-out infinite;
+
+  --shadow-card:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-card-hover:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-button: 0 4px 0 0 rgba(0, 0, 0, 0.2);
+  --shadow-button-hover: 0 6px 0 0 rgba(0, 0, 0, 0.2);
+
+  --background-image-gradient-radial: radial-gradient(var(--tw-gradient-stops));
+
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-accordion-content-height);
+    }
+  }
+  @keyframes accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+    to {
+      height: 0;
+    }
+  }
+  @keyframes bounce {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-5px);
+    }
+  }
+  @keyframes pulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.7;
+    }
+  }
+  @keyframes confetti {
+    0% {
+      transform: translateY(0) rotate(0);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(100vh) rotate(720deg);
+      opacity: 0;
+    }
+  }
+  @keyframes shine {
+    0% {
+      background-position: 200% center;
+    }
+    100% {
+      background-position: -200% center;
+    }
+  }
+}
+
+@utility container {
+  margin-inline: auto;
+  padding-inline: 2rem;
+  @media (width >= --theme(--breakpoint-sm)) {
+    max-width: none;
+  }
+  @media (width >= 1400px) {
+    max-width: 1400px;
+  }
+}
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+}
+
+@layer base {
+  :root {
+    --background: 210 20% 99%;
+    --foreground: 215 25% 27%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 215 25% 27%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 215 25% 27%;
+
+    --primary: 142 55% 33%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 42 90% 55%;
+    --secondary-foreground: 215 25% 27%;
+
+    --muted: 210 20% 96%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 210 20% 96%;
+    --accent-foreground: 215 25% 27%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 215 25% 27%;
+
+    --radius: 0.75rem;
+
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+  }
+
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 210 20% 98%;
+
+    --card: 24 9.8% 2%;
+    --card-foreground: 210 20% 98%;
+
+    --popover: 24 9.8% 2%;
+    --popover-foreground: 210 20% 98%;
+
+    --primary: 142 55% 33%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 42 90% 55%;
+    --secondary-foreground: 215 25% 27%;
+
+    --muted: 215 25% 20%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 215 25% 20%;
+    --accent-foreground: 210 20% 98%;
+
+    --destructive: 0 62% 30%;
+    --destructive-foreground: 210 20% 98%;
+
+    --border: 215 25% 20%;
+    --input: 215 25% 20%;
+    --ring: 210 20% 98%;
+
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-sans;
+  }
+}
+
+.hide-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Refined gamified UI styles with 3D effects */
+.game-card {
+  @apply bg-card rounded-xl border-2 transition-all duration-200;
+  position: relative;
+  overflow: hidden;
+}
+
+.game-button {
+  @apply transform rounded-xl px-6 py-3 font-bold transition-all duration-200;
+  position: relative;
+  border: 2px solid transparent;
+  box-shadow: 0 4px 0 0 rgba(0, 0, 0, 0.2);
+  transform: translateY(0);
+  cursor: pointer;
+}
+
+.game-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 0 rgba(0, 0, 0, 0.2);
+}
+
+.game-button:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.2);
+}
+
+.game-button-primary {
+  background: linear-gradient(180deg, #4caf50 0%, #388e3c 100%);
+  @apply border-b-2 border-[#2E7D32] text-white;
+}
+
+.game-button-primary:hover {
+  background: linear-gradient(180deg, #5cb860 0%, #4caf50 100%);
+}
+
+.game-button-secondary {
+  background: linear-gradient(180deg, #ffc107 0%, #ffa000 100%);
+  @apply border-b-2 border-[#FF8F00] text-black;
+}
+
+.game-button-secondary:hover {
+  background: linear-gradient(180deg, #ffd54f 0%, #ffc107 100%);
+}
+
+.game-button-blue {
+  background: linear-gradient(180deg, #2196f3 0%, #1976d2 100%);
+  @apply border-b-2 border-[#0D47A1] text-white;
+}
+
+.game-button-blue:hover {
+  background: linear-gradient(180deg, #42a5f5 0%, #2196f3 100%);
+}
+
+.game-button-gray {
+  background: linear-gradient(180deg, #78909c 0%, #546e7a 100%);
+  @apply border-b-2 border-[#455A64] text-white;
+}
+
+.game-button-gray:hover {
+  background: linear-gradient(180deg, #90a4ae 0%, #78909c 100%);
+}
+
+.game-button-destructive {
+  background: linear-gradient(180deg, #f44336 0%, #d32f2f 100%);
+  @apply border-b-2 border-[#C62828] text-white;
+}
+
+.game-button-destructive:hover {
+  background: linear-gradient(180deg, #ef5350 0%, #f44336 100%);
+}
+
+.game-input {
+  @apply rounded-xl border-2 p-3 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/50;
+}
+
+.confetti {
+  @apply animate-confetti absolute h-5 w-1.5;
+}
+
+.game-badge {
+  @apply inline-flex items-center justify-center rounded-full px-3 py-1 text-sm font-semibold transition-all;
+  box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.1);
+}
+
+.game-progress-bar {
+  @apply h-2.5 overflow-hidden rounded-full bg-gray-200 dark:bg-gray-800;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.game-progress-fill {
+  @apply h-full rounded-full transition-all duration-500 ease-out;
+  background-size: 30px 30px;
+  background-image: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.15) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.15) 50%,
+    rgba(255, 255, 255, 0.15) 75%,
+    transparent 75%,
+    transparent
+  );
+  animation: progress-animation 1s linear infinite;
+}
+
+@keyframes progress-animation {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 30px 0;
+  }
+}
+
+.game-tab {
+  @apply rounded-lg px-4 py-2 text-sm font-medium transition-all;
+  box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.1);
+}
+
+.game-tab-active {
+  @apply text-foreground bg-gray-100 shadow-md;
+  box-shadow: 0 3px 0 0 rgba(0, 0, 0, 0.1);
+}
+
+.game-tab-inactive {
+  @apply text-muted-foreground bg-gray-100 hover:bg-white/50;
+}
+
+.game-stat-card {
+  @apply rounded-lg border border-gray-100 bg-white p-4 text-center shadow-xs;
+}
