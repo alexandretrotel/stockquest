@@ -112,6 +112,11 @@ export const getProfileData = async (
  */
 export const getProfileUserDataFromUserId = async (userId: string) => {
   const username = await getUsernameFromUserId(userId);
+
+  if (!username) {
+    throw new Error("User not found");
+  }
+
   const profileUserData = await getProfileUserData(username);
 
   return profileUserData;
