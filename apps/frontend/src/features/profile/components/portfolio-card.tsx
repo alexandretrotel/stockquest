@@ -45,7 +45,7 @@ export default function PortfolioCard({
                 <Badge
                   color="primary"
                   size="sm"
-                  label={`${(portfolio.performance[portfolioPerformances - 1].totalReturn * 100).toFixed(2)}%`}
+                  label={`${portfolio.performance[portfolioPerformances - 1].totalReturn.toFixed(2)}%`}
                 />
               )}
             </div>
