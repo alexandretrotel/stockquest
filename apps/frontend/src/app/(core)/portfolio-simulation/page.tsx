@@ -57,9 +57,9 @@ export default function PerformanceResults() {
 
   const performance: PortfolioPerformance = {
     date: new Date(),
-    totalReturn,
-    sharpeRatio,
-    maxDrawdown,
+    totalReturn: result.portfolio.totalReturn,
+    sharpeRatio: result.portfolio.sharpeRatio,
+    maxDrawdown: result.portfolio.maxDrawdown,
     startDate: result.startingDate,
     endDate: result.endingDate,
     beatsSP500: result.beatsBenchmark,
