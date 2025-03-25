@@ -1,1 +1,1 @@
-# stockquest-monorepo
+# StockQuest
