@@ -5,6 +5,7 @@ import { PlusCircle, Check, TrendingUp, TrendingDown } from "lucide-react";
 import { usePortfolioStore } from "@/stores/portfolio.store";
 import { useStock } from "@/features/stock-insights/hooks/use-stock";
 import Link from "next/link";
+import { StockCardSkeleton } from "./skeleton/stock-card-skeleton";
 
 interface StockCardProps {
   symbol: string;
@@ -12,16 +13,16 @@ interface StockCardProps {
 
 export default function StockCard({ symbol }: StockCardProps) {
   const { handleAddOrRemove, isInPortfolio } = usePortfolioStore();
-  const { stock } = useStock(symbol);
+  const { stock, isLoading } = useStock(symbol);
 
-  if (!stock) {
-    return;
+  if (isLoading) {
+    return <StockCardSkeleton />;
   }
 
-  const shortName = stock.shortName ?? "N/A";
-  const fullExchangeName = stock.fullExchangeName ?? "N/A";
-  const regularMarketPrice = stock.regularMarketPrice ?? 0;
-  const regularMarketChangePercent = stock.regularMarketChangePercent ?? 0;
+  const shortName = stock?.shortName ?? "N/A";
+  const fullExchangeName = stock?.fullExchangeName ?? "N/A";
+  const regularMarketPrice = stock?.regularMarketPrice ?? 0;
+  const regularMarketChangePercent = stock?.regularMarketChangePercent ?? 0;
 
   return (
     <div className="game-card group flex h-full flex-col justify-between overflow-hidden">
