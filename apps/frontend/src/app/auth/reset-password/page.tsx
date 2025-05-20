@@ -6,8 +6,8 @@ import { Label } from "@/components/ui/label";
 import { MINIMUM_PASSWORD_LENGTH } from "@/data/settings";
 import { authClient } from "@/lib/auth-client";
 import { ArrowLeft, Loader2 } from "lucide-react";
-import { useParams, useRouter } from "next/navigation";
-import React from "react";
+import { useRouter } from "next/navigation";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
@@ -17,8 +17,9 @@ type ResetPasswordData = {
 };
 
 export default function ResetPasswordPage() {
+  const [token, setToken] = React.useState<string | null>(null);
+
   const router = useRouter();
-  const params = useParams();
   const {
     register,
     handleSubmit,
@@ -26,7 +27,13 @@ export default function ResetPasswordPage() {
     watch,
   } = useForm<ResetPasswordData>();
 
-  const token = params.token?.toString();
+  useEffect(() => {
+    const token = new URLSearchParams(window.location.search).get("token");
+    if (!token) {
+      toast.error("Invalid reset link. Please try again.");
+    }
+    setToken(token);
+  }, []);
 
   const onSubmit = async (data: ResetPasswordData) => {
     if (!token) {

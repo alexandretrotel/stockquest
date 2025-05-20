@@ -1,6 +1,7 @@
 "use client";
 
 import PortfolioCard from "@/features/saved-portfolios/components/portfolio-card";
+import PortfolioCardSkeleton from "@/features/stock-insights/components/skeleton/portfolio-card-skeleton";
 import { useSavedPortfolios } from "@/features/user/hooks/use-saved-portfolios";
 
 export default function SavedPortfolios() {
@@ -10,9 +11,12 @@ export default function SavedPortfolios() {
     return (
       <div className="flex flex-col gap-4">
         <h1 className="text-foreground text-2xl font-bold">Saved Portfolios</h1>
-        <p className="text-muted-foreground animate-pulse">
-          Loading portfolios...
-        </p>
+
+        <div className="grid gap-4 md:grid-cols-3">
+          {Array.from({ length: 8 }).map((_, index) => {
+            return <PortfolioCardSkeleton key={index} />;
+          })}
+        </div>
       </div>
     );
   }
